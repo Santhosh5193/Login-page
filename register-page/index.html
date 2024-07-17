@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form-id">
+        <h1>Registeration-Form</h1>
+        <div class="div">
+            <label for="name" >Name : </label>
+             <input type="text" id="name" onkeydown="textonkeydown()" onblur="textonblur()" onfocus="textonfocus()" >
+             <p class="error" id="name-error"> </p>
+        </div>
+        <div class="div">
+            <label for="email">Email : </label>
+            <input type="email" id="email" onkeydown="emailonkeydown()" onblur="emailonblur()" onfocus="emailonfocus()" >
+            <p class="error" id="email-error"> </p>
+
+        </div>
+        <div class="div">
+            <label >Mobile-Number :</label>
+            <input type="text" id="number" onkeydown="numberonkeydown()" onblur="numberonblur()" onfocus="numberonfocus()" >
+            <p class="error" id="number-error"> </p>
+        </div>
+        <div class="div">
+            <label >Password :</label>
+            <input  type="password" id="password" onkeydown="passwordonkeydown()" onblur="passwordonblur()" onfocus="passwordonfocus()" >
+            <p class="error" id="password-error"> </p>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" id="checkbox" value="Some value">
+            <label>Details are True</label>
+            <p class="error" id="output"></p>
+        </div>
+        <button type="submit" onclick="return localstorage()" >Submit</button>
+        <h2 class="successMessage" id="successMessage" style="display: none;" >Registeration Succesfull!..</h2>
+    </form>
+    <footer>
+        <h4>&</h4>
+        <p>You already have Account ? back to <span><a href="../index.html">Login-page </a></span> </p>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+</html>
