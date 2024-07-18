@@ -23,9 +23,19 @@
     }else{
         document.getElementById("login-error").innerHTML = "check email id & password";
     }
-
-
  }
+
+   //temporary admin details
+    
+   localStorage.setItem(
+    "email" , "santhosh@gmail.com",
+  );
+  localStorage.setItem(
+    "password" , "santhoshS",
+  );   
+
+  //local storage
+
  const users = JSON.parse(localStorage.getItem("login-users")) || {};
  function localstorage(){
     const value = {
@@ -33,15 +43,9 @@
          password: password.value
       }; 
       localStorage.setItem("login-users", JSON.stringify(value));
-    
-      localStorage.setItem(
-        "email" , "santhosh@gmail.com",
-      );
-      localStorage.setItem(
-        "password" , "santhoshS",
-      );
       
      checkLogin();
+     
  }
 
 // Event Functions
@@ -50,44 +54,7 @@ const formid = document.getElementById("form-id");
 const mail = document.getElementById("login-email");
 const password = document.getElementById("login-password");
 
-// submit validation
-
-function submitvalidation(e){
-    e.preventDefault();
-
-    const emailstored = localStorage.getItem("email");
-    const  passwordstored = localStorage.getItem("password");
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(mail.value === "" ){
-        document.getElementById("email-error").innerHTML = "Enter the email";
-     }else if(mail.value !== emailstored){
-        document.getElementById("email-error").innerHTML = "Invalid email";
-    }else{
-        document.getElementById("email-error").innerHTML = " ";
-    }
-
-    if(password.value === "" ){
-        document.getElementById("password-error").innerHTML = "Enter the password";
-    }else if (password.value !== passwordstored){
-        document.getElementById("password-error").innerHTML = "password is inncorrect";
-    }else if(password.value.length < 8){
-        document.getElementById("password-error").innerHTML = " password must have 8 characters";
-    }else if(password.value.search(/[A-Z]/) == -1){
-         document.getElementById("password-error").innerHTML = " password should be given attleast one  uppercase";
-    }else{
-        document.getElementById("password-error").innerHTML = "";
-       }
-        
-       mail.value = "";
-       password.value = "";
-}
-
-formid.addEventListener("submit", submitvalidation );
-
-//onfocus validation
-
-function emailonfocus(){
+function emailcheck(){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if(mail.value === "" ){
         document.getElementById("email-error").innerHTML = "Enter the email";
@@ -97,36 +64,7 @@ function emailonfocus(){
         document.getElementById("email-error").innerHTML = " ";
     }
 }
-
-function passwordonfocus(){
-    if(password.value === "" ){
-    document.getElementById("password-error").innerHTML = "Enter the password";
-    }else if(password.value.length < 8){
-        document.getElementById("password-error").innerHTML = " password must have 8 characters";
-    }
-    else if(password.value.search(/[A-Z]/) == -1){
-        document.getElementById("password-error").innerHTML = " password should be given attleast one  uppercase";
-    }else{
-    document.getElementById("password-error").innerHTML = "";
-   }
-}
-
-//onblur validation
-
-function emailonkeydown(){
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if(mail.value === "" ){
-    document.getElementById("email-error").innerHTML = "Enter the email";
-    }else if(!emailRegex.test(mail.value)){
-    document.getElementById("email-error").innerHTML = "enter the currect mail ";
-    }else{
-    document.getElementById("email-error").innerHTML = " ";
-    }
-
-}
-
-function passwordonkeydown(){
+function passwordcheck(){
     if(password.value === "" ){
         document.getElementById("password-error").innerHTML = "Enter the password";
         }else if(password.value.length < 8){
@@ -139,3 +77,66 @@ function passwordonkeydown(){
        }
 }
 
+// submit validation
+
+function submitvalidation(e){
+    e.preventDefault();
+
+    const emailstored = localStorage.getItem("email");
+    const  passwordstored = localStorage.getItem("password");
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(mail.value === "" ){
+        document.getElementById("email-error").innerHTML = "Enter the email";
+        }else if(!emailRegex.test(mail.value)){
+        document.getElementById("email-error").innerHTML = "enter the currect mail ";
+        }else{
+        document.getElementById("email-error").innerHTML = " ";
+    }
+
+    if(password.value === "" ){
+        document.getElementById("password-error").innerHTML = "Enter the password";
+        }else if(password.value.length < 8){
+            document.getElementById("password-error").innerHTML = " password must have 8 characters";
+        }
+        else if(password.value.search(/[A-Z]/) == -1){
+            document.getElementById("password-error").innerHTML = " password should be given attleast one  uppercase";
+        }else{
+        document.getElementById("password-error").innerHTML = "";
+       }
+        
+       mail.value = "";
+       password.value = "";
+}
+
+formid.addEventListener("submit", submitvalidation );
+
+//onfocus validation
+
+function emailonfocus(){
+    emailcheck();
+}
+
+function passwordonfocus(){
+    passwordcheck();
+}
+
+//keydown validation
+
+function emailonkeydown(){
+    emailcheck();
+}
+
+function passwordonkeydown(){
+    passwordcheck();
+} 
+
+//onblur validation
+
+function emailonblur(){
+    emailcheck();
+}
+
+function passwordonblur(){
+    passwordcheck();
+}

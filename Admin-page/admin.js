@@ -30,9 +30,55 @@ function additemtoDom(item){
 
      const rejectbutton = rejectButton("remove-item btn-link text-red");
       divicons.appendChild(rejectbutton);
-    
-      itemlist.appendChild(li)
+
+      document.addEventListener("click",onclickEditItems);
+      document.addEventListener("click",rejectEditItems);
+
+      itemlist.appendChild(li);
 }
+
+function onclickEditItems(e) {
+  if (e.target.parentElement.classList.contains("approve-item")) {
+    removeediticon(e.target.parentElement.parentElement.parentElement);
+  }
+}
+function rejectEditItems(e) {
+  if (e.target.parentElement.classList.contains("remove-item")) {
+    approveediticon(e.target.parentElement.parentElement.parentElement);
+  }
+}
+
+function removeediticon(item) {
+  isEditMode = true;
+
+  itemlist
+    .querySelectorAll("li")
+    .forEach((i) => i.classList.remove("edit-mode"));
+
+  item.classList.add("edit-mode");
+
+  removeicon();
+}
+function approveediticon(item) {
+  isEditMode = true;
+
+  itemlist
+    .querySelectorAll("li")
+    .forEach((i) => i.classList.remove("edit-mode"));
+
+  item.classList.add("edit-mode");
+
+  approveicon();
+}
+function removeicon(){
+  const removeicon = document.getElementsByClassName("edit-mode")[0]?.children[0].children[1].children[0];
+  removeicon.remove();
+}
+function approveicon(){
+  const removeicon = document.getElementsByClassName("edit-mode")[0]?.children[0].children[0].children[0];
+  removeicon.remove();
+}
+//DOM create Button
 
 function acceptButton(c) {
   const editbtn = document.createElement("button");

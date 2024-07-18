@@ -8,17 +8,34 @@ let isEditMode = false;
 function displayItems() {
   const itemsFromStorage = getItemsFromStorage();
   itemsFromStorage.forEach((item) => additemtoDom(item));
-  checkUI();
-
-  let itemstored = JSON.parse(localStorage.getItem("items"));
+ 
   let ApproveList = JSON.parse(localStorage.getItem("Approve-items"));
   let RejectList = JSON.parse(localStorage.getItem("Reject-items"));
   
-  
-  document.getElementsByClassName("absolute").innerHTML = "ApproveList";
+  let itemtxt = document.getElementsByClassName("text");
+
     for (let i=0 ; i<ApproveList.length ;i++){
-      console.log(ApproveList[i]);
+      for (let j=0 ; j<itemtxt.length ;j++){
+        if(ApproveList[i] === itemtxt[j].innerHTML){
+          let item = itemtxt[j].parentElement.children[1];
+          item.innerHTML = "Approve";
+          item.style.background = "green";
+          item.style.color = "white";
+        }
+      }
     }
+    for (let i=0 ; i<RejectList.length ;i++){
+      for (let j=0 ; j<itemtxt.length ;j++){
+        if(RejectList[i] === itemtxt[j].innerHTML){
+          let item = itemtxt[j].parentElement.children[1];
+          item.innerHTML = "Reject";
+          item.style.background = "red";
+          item.style.color = "white";
+        }
+      }
+    }
+
+    checkUI();
 }
 
 function onclickAddItems(e) {
@@ -52,12 +69,16 @@ function onclickAddItems(e) {
 //add items to dom
 function additemtoDom(item) {
   const li = document.createElement("li");
-  li.appendChild(document.createTextNode(item));
+  
+  const text = document.createElement("span");
+  text.appendChild(document.createTextNode(item));
+  text.classList.add("text")
+  li.appendChild(text);
 
   const pendingstate = document.createElement("button");
   pendingstate.classList.add("absolute");
   pendingstate.innerHTML = "pending...";
-  li.appendChild(pendingstate)
+  li.appendChild(pendingstate);
 
   const divicons = document.createElement("div");
   divicons.classList.add("flex");
@@ -71,13 +92,17 @@ function additemtoDom(item) {
 
   itemlist.addEventListener("click" ,removeicon);
 
-
   itemlist.appendChild(li);
+  
 }
 
-function removeicon(){
-  const removeicon = document.getElementsByClassName("edit-mode")[0]?.children[1].children[1];
+function removeicon(){  
+   if(isEditMode){
+    const removeicon = document.getElementsByClassName("edit-mode")[0]?.children[2].children[1];
     removeicon.remove();
+   }else{
+    itemlist.querySelectorAll("li");
+   }
 }
 
 
@@ -140,6 +165,7 @@ function onclickremoveItems(e) {
 }
 
 function removeItem(item) {
+
   if (confirm("Are you sue to delete")) {
     item.remove();
 
@@ -164,6 +190,7 @@ function onclickEditItems(e) {
   }
 }
 function setItemToEdit(item) {
+  console.log(item);
   isEditMode = true;
 
   itemlist
@@ -174,6 +201,7 @@ function setItemToEdit(item) {
   formBtn.innerHTML = `<i class="fa-solid fa-pen"></i> Update Item`;
   formBtn.style.background = "green";
   iteminput.value = item.firstChild.textContent;
+  removeItemFromStorage(item.firstChild.textContent);
 }
 
 //clear items
