@@ -20,32 +20,38 @@ function localstorage(){
 }
 
 //submit validation
+const namecheck =  document.getElementById("name-error");
+const emailcheck = document.getElementById("email-error");
+const checkbox = document.getElementById("output");
+const numcheck =  document.getElementById("number-error");
+const pwd = document.getElementById("password-error");
+
 
 form.addEventListener("submit" ,(e) => {
     
     if(fname.value === '' || fname.value == null){
         e.preventDefault(); 
-        document.getElementById("name-error").innerHTML = "Enter the name";
+        namecheck.innerHTML = "Enter the name";
     }else{
-        document.getElementById("name-error").innerHTML = "";
+        namecheck.innerHTML = "";
     } 
 
     //email validation 
 
     if(mail.value === '' || mail.value == null){
         e.preventDefault(); 
-        document.getElementById("email-error").innerHTML = "Enter the email";
+        emailcheck.innerHTML = "Enter the email";
     }else{
-        document.getElementById("email-error").innerHTML = "";
+        emailcheck.innerHTML = "";
     } 
     
     // check validation
 
     if(!error.checked){
         e.preventDefault();
-        document.getElementById("output").innerHTML = "Tick the checkbox";
+        checkbox.innerHTML = "Tick the checkbox";
     }else{
-        document.getElementById("output").innerHTML = "";
+        checkbox.innerHTML = "";
     }      
     
     //number validation 
@@ -53,17 +59,16 @@ form.addEventListener("submit" ,(e) => {
 
     if(number.value === '' || number.value == null){
         e.preventDefault(); 
-        document.getElementById("number-error").innerHTML = "Enter the mobile number";
+        numcheck.innerHTML = "Enter the mobile number";
     }else if(ncheck.test(number.value)){
         e.preventDefault();
-        document.getElementById("number-error").innerHTML = " numbers only accepted ";      
+        numcheck.innerHTML = " numbers only accepted ";      
     }else{
-        document.getElementById("number-error").innerHTML = " ";      
+        numcheck.innerHTML = " ";      
     }
       
 
     //password validation 
-    var pwd = document.getElementById("password-error");
 
     if(password.value === '' || password.value == null){
         e.preventDefault(); 
@@ -92,104 +97,51 @@ form.addEventListener("submit" ,(e) => {
 
 //checking details
 
-function namecheck(){
+
+function namechecking() {
     const lettersRegex = /^[A-Za-z]+$/;
   
     if(fname.value === "" ){
-        document.getElementById("name-error").innerHTML = "Enter the name";
+        namecheck.innerHTML = "Enter the name";
         }else if(!lettersRegex.test(fname.value)) {
-        document.getElementById("name-error").innerHTML = "Name accepts only Characters";
+            namecheck.innerHTML = "Name accepts only Characters";
         }else{
-        document.getElementById("name-error").innerHTML = " ";
+            namecheck.innerHTML = " ";
     }
 }
-function emailcheck(){
+function emailchecking() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if(mail.value === "" ){
-    document.getElementById("email-error").innerHTML = "Enter the email";
+        emailcheck.innerHTML = "Enter the email";
     }else if(!emailRegex.test(mail.value)){
-    document.getElementById("email-error").innerHTML = "enter the currect mail ";
+        emailcheck.innerHTML = "enter the currect mail ";
     }else{
-    document.getElementById("email-error").innerHTML = " ";
+        emailcheck.innerHTML = " ";
 }
 }
-function numbercheck() {
+function numberchecking() {
     const ncheck = /^[A-Za-z]+$/;
     
     if(number.value === "" ){
-    document.getElementById("number-error").innerHTML = "Enter the number";
+    numcheck.innerHTML = "Enter the number";
     }else if(ncheck.test(number.value)){
-        document.getElementById("number-error").innerHTML = " numbers only accepted ";      
+        numcheck.innerHTML = " numbers only accepted ";      
     }else if(number.value.length != 10){
-        document.getElementById("number-error").innerHTML = " Number must have 10 digits ";
+        numcheck.innerHTML = " Number must have 10 digits ";
     }else{
-    document.getElementById("number-error").innerHTML = " ";
+        numcheck.innerHTML = " ";
 }
 }
-function passwordcheck(){
+function passwordchecking(){
     if(password.value === "" ){
-        document.getElementById("password-error").innerHTML = "Enter the password";
+        pwd.innerHTML = "Enter the password";
         }else if(password.value.length < 8){
-            document.getElementById("password-error").innerHTML = " password must have 8 characters";
+            pwd.innerHTML = " password must have 8 characters";
         }
         else if(password.value.search(/[A-Z]/) == -1){
-            document.getElementById("password-error").innerHTML = " password should be given attleast one  uppercase";
+            pwd.innerHTML = " password should be given attleast one  uppercase";
         }else{
-        document.getElementById("password-error").innerHTML = "";
+            pwd.innerHTML = "";
     }
-}
-
-//On blur validation
-
- function textonblur(){
-    namecheck();
-}
-
- function emailonblur(){
-    emailcheck();
-}
-
- function numberonblur(){
-    numbercheck();
-}
-
- function passwordonblur(){
-    passwordcheck();
-}
-
-// keydown validation
-
-function textonkeydown(){
-    namecheck();
-}
-
-function emailonkeydown(){
-    emailcheck();
-}
-
- function numberonkeydown(){
-    numbercheck();
-}
-
- function passwordonkeydown(){
-    passwordcheck();
-}
-
-// onfocus validation
-
-function textonfocus(){
-    namecheck();
-}
-
-function emailonfocus(){
-    emailcheck();
-}
-
- function numberonfocus(){
-    numbercheck();
-}
-
- function passwordonfocus(){
-    passwordcheck();
 }

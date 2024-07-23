@@ -13,12 +13,12 @@
         <form id="form-id">
           <div>
             <label for="email">Email : </label>
-            <input type="email" id="login-email" autocomplete="off" name="email" onfocus="emailonfocus()" onkeydown="emailonkeydown()"  onblur="emailonblur()"/>
+            <input type="email" id="login-email" autocomplete="off" name="email" onfocus="emailcheck()" onkeydown="emailcheck()" onkeypress="emailcheck()" onkeyup="emailcheck()" onblur="emailcheck()"/>
             <p class="error" id="email-error"> </p>
           </div>
           <div>
             <label for="pwd">Password : </label>
-            <input type="text" id="login-password" autocomplete="off" name="pwd" onfocus="passwordonfocus()"  onkeydown="passwordonkeydown()" onblur="passwordonblur()"/>
+            <input type="text" id="login-password" autocomplete="off" name="pwd" onfocus=" passwordcheck()"  onkeydown="passwordcheck()" onkeypress="passwordcheck()" onkeyup="passwordcheck()" onblur=" passwordcheck()"/>
             <p class="error" id="password-error"> </p>
           </div>
           <p class="error" id="login-error"></p> <br>

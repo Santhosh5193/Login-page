@@ -19,22 +19,32 @@ document.addEventListener("DOMContentLoaded", displayItems);
 function additemtoDom(item){
 
       let li = document.createElement("li");
-     li.appendChild(document.createTextNode(item));
+    //  li.appendChild(document.createTextNode(item));
 
-      const divicons = document.createElement("div");
-      divicons.classList.add("flex");
-      li.appendChild(divicons);
+    //   const divicons = document.createElement("div");
+    //   divicons.classList.add("flex");
+    //   li.appendChild(divicons);
 
-      const acceptbutton = acceptButton("approve-item btn-link text-green");
-     divicons.appendChild(acceptbutton);
+    //   const acceptbutton = acceptButton("approve-item btn-link text-green");
+    //  divicons.appendChild(acceptbutton);
 
-     const rejectbutton = rejectButton("remove-item btn-link text-red");
-      divicons.appendChild(rejectbutton);
+    //  const rejectbutton = rejectButton("remove-item btn-link text-red");
+    //   divicons.appendChild(rejectbutton);
+
+      let icons = `<span>${item}</span><div class = "flex">
+      <button class="approve-item btn-link text-green">
+      <i class = "fa-solid fa-check"></i>
+      </button>
+      <button class="remove-item btn-link text-red">
+      <i class = "fa-solid fa-xmark"></i>
+      </button>
+      </div>`;
+      li.innerHTML = icons;
+
+      itemlist.appendChild(li);      
 
       document.addEventListener("click",onclickEditItems);
       document.addEventListener("click",rejectEditItems);
-
-      itemlist.appendChild(li);
 }
 
 function onclickEditItems(e) {
@@ -80,32 +90,32 @@ function approveicon(){
 }
 //DOM create Button
 
-function acceptButton(c) {
-  const editbtn = document.createElement("button");
-  editbtn.className = c;
-  const editicon = acceptIcon("fa-solid fa-check");
-  editbtn.appendChild(editicon);
-  return editbtn;
-}
-function acceptIcon(c) {
-  const acceptIcon = document.createElement("i");
-  acceptIcon.className = c;
-  return acceptIcon;
-}
+// function acceptButton(c) {
+//   const editbtn = document.createElement("button");
+//   editbtn.className = c;
+//   const editicon = acceptIcon("fa-solid fa-check");
+//   editbtn.appendChild(editicon);
+//   return editbtn;
+// }
+// function acceptIcon(c) {
+//   const acceptIcon = document.createElement("i");
+//   acceptIcon.className = c;
+//   return acceptIcon;
+// }
 
-function rejectButton(classes) {
-  const button = document.createElement("button");
-  button.className = classes;
-  const icon = rejectIcon("fa-solid fa-xmark");
-  button.appendChild(icon);
-  return button;
-}
+// function rejectButton(classes) {
+//   const button = document.createElement("button");
+//   button.className = classes;
+//   const icon = rejectIcon("fa-solid fa-xmark");
+//   button.appendChild(icon);
+//   return button;
+// }
 
-function rejectIcon(classes) {
-  const icon = document.createElement("i");
-  icon.className = classes;
-  return icon;
-}
+// function rejectIcon(classes) {
+//   const icon = document.createElement("i");
+//   icon.className = classes;
+//   return icon;
+// }
 
 
 document.addEventListener("click" , approveitem);

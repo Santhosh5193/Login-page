@@ -9,9 +9,7 @@
     for(let i = 0 ; i<users.length ;i++){
         if(users[i].email ===  mail && users[i].password === password){
              window.location = "./To-do-list-main/index.html";        
-        }else{
-           document.getElementById("login-error").innerHTML = "check email id & password";
-         }
+        }
     }
 
     const getloginid = localStorage.getItem("email");
@@ -20,8 +18,6 @@
     
     if(mail === getloginid && password ===getloginpwd){
         window.location = "./Admin-page/admin.html";        
-    }else{
-        document.getElementById("login-error").innerHTML = "check email id & password";
     }
  }
 
@@ -54,55 +50,31 @@ const formid = document.getElementById("form-id");
 const mail = document.getElementById("login-email");
 const password = document.getElementById("login-password");
 
-function emailcheck(){
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(mail.value === "" ){
-        document.getElementById("email-error").innerHTML = "Enter the email";
-        }else if(!emailRegex.test(mail.value)){
-        document.getElementById("email-error").innerHTML = "enter the currect mail ";
-        }else{
-        document.getElementById("email-error").innerHTML = " ";
-    }
-}
-function passwordcheck(){
-    if(password.value === "" ){
-        document.getElementById("password-error").innerHTML = "Enter the password";
-        }else if(password.value.length < 8){
-            document.getElementById("password-error").innerHTML = " password must have 8 characters";
-        }
-        else if(password.value.search(/[A-Z]/) == -1){
-            document.getElementById("password-error").innerHTML = " password should be given attleast one  uppercase";
-        }else{
-        document.getElementById("password-error").innerHTML = "";
-       }
-}
+const pwd = document.getElementById("password-error");
+const checkmail = document.getElementById("email-error");
+
+
 
 // submit validation
 
 function submitvalidation(e){
     e.preventDefault();
 
-    const emailstored = localStorage.getItem("email");
-    const  passwordstored = localStorage.getItem("password");
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if(mail.value === "" ){
-        document.getElementById("email-error").innerHTML = "Enter the email";
+        checkmail.innerHTML = "Enter the email";
         }else if(!emailRegex.test(mail.value)){
-        document.getElementById("email-error").innerHTML = "enter the currect mail ";
+            checkmail.innerHTML = "enter the currect mail ";
         }else{
-        document.getElementById("email-error").innerHTML = " ";
+            checkmail.innerHTML = " ";
     }
 
-    if(password.value === "" ){
-        document.getElementById("password-error").innerHTML = "Enter the password";
-        }else if(password.value.length < 8){
-            document.getElementById("password-error").innerHTML = " password must have 8 characters";
-        }
-        else if(password.value.search(/[A-Z]/) == -1){
-            document.getElementById("password-error").innerHTML = " password should be given attleast one  uppercase";
+    if(password.value === "" || password.value === null){
+        pwd.innerHTML = "Enter the password";
+        }else if(password.value.search(/[A-Z]/) == -1){
+            pwd.innerHTML = " password should be given attleast one  uppercase";
         }else{
-        document.getElementById("password-error").innerHTML = "";
+            pwd.innerHTML = "";
        }
         
        mail.value = "";
@@ -111,32 +83,28 @@ function submitvalidation(e){
 
 formid.addEventListener("submit", submitvalidation );
 
-//onfocus validation
+//checking mail
 
-function emailonfocus(){
-    emailcheck();
+function emailcheck(){
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(mail.value === "" ){
+        checkmail.innerHTML = "Enter the email";
+        }else if(!emailRegex.test(mail.value)){
+            checkmail.innerHTML = "enter the currect mail ";
+        }else{
+            checkmail.innerHTML = " ";
+    }
 }
 
-function passwordonfocus(){
-    passwordcheck();
+function passwordcheck(){
+    if(password.value === "" ){
+         pwd.innerHTML = "Enter the password";
+        }else if(password.value.length < 8 ){
+            pwd.innerHTML = " password must have 8 characters";
+        }else if(password.value.search(/[A-Z]/) == -1){
+            pwd.innerHTML = " password should be given attleast one  uppercase";
+        }else{
+            pwd.innerHTML = "";
+       }
 }
 
-//keydown validation
-
-function emailonkeydown(){
-    emailcheck();
-}
-
-function passwordonkeydown(){
-    passwordcheck();
-} 
-
-//onblur validation
-
-function emailonblur(){
-    emailcheck();
-}
-
-function passwordonblur(){
-    passwordcheck();
-}
